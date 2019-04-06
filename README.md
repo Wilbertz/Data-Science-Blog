@@ -13,3 +13,20 @@ The Ananconda notebook corresponding to a data science blog.
 
 There should be no necessary libraries to run the code here beyond the Anaconda distribution of Python.  The code should run with no issues using Python versions 3.*.
 
+. Installations
+This project was written in Python 3.6, using Jupyter Notebook on Anaconda. The relevant Python packages for this project are as follows:
+
+numpy
+pandas
+matplotlib
+IPython (display module)
+collections
+itertools (chain module)
+sklearn
+time
+sklearn.model_selection (train_test_split module)
+sklearn.preprocessing (Imputer and StandardScaler modules)
+sklearn.metrics (mean_squared_error module)
+sklearn.linear_model (LinearRegression module)
+sklearn.tree (DecisionTreeRegressor module)
+

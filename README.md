@@ -1,4 +1,4 @@
-# AirBNB Blog
+# Airbnb Blog
 The Ananconda notebook corresponding to a data science blog analyzing AirBnB data.
 
 ## Table of Contents

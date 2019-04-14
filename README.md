@@ -50,7 +50,7 @@ Root/
 |   └── reviews.csv  
 └── Images/  
     ├── amenities.png  
-    ├──	price_histogram.png  
+    ├──	price_histogram.png    
     └── price_time_series.png  
     └── seattle_prices.png  
 

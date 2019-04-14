@@ -40,7 +40,7 @@ The notebook tries to answer 3 business questions about Seattle Airbnb rentals:
 
 ## Directory Structure <a name="directoryStructure"></a>
 
-Root/
+Root/  
 ├── Understanding Seattle Airbnb Data.ipynb  
 ├── helper.py  
 ├── README.md  

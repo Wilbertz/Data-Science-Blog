@@ -1,5 +1,5 @@
 # Understanding Seattle Airbnb Data
-The Ananconda notebook corresponding to a data science blog analyzing AirBnB data.
+The Ananconda notebook corresponding to a data science blog analyzing Airbnb data.
 
 ## Table of Contents
 

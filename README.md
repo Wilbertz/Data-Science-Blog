@@ -41,18 +41,18 @@ The notebook tries to answer 3 business questions about Seattle Airbnb rentals:
 ## Directory Structure <a name="directoryStructure"></a>
 
 Root/
-├── Understanding Seattle Airbnb Data.ipynb
-├── helper.py
-├── README.md
-└── Data/
-|   ├── calendar.csv
-|   ├──	listings.csv
-|   └── reviews.csv
-└── Images/
-    ├── amenities.png
-    ├──	price_histogram.png
-    └── price_time_series.png
-    └── seattle_prices.png
+├── Understanding Seattle Airbnb Data.ipynb  
+├── helper.py  
+├── README.md  
+└── Data/  
+|   ├── calendar.csv  
+|   ├──	listings.csv  
+|   └── reviews.csv  
+└── Images/  
+    ├── amenities.png  
+    ├──	price_histogram.png  
+    └── price_time_series.png  
+    └── seattle_prices.png  
 
 ## Results <a name="results"></a>
 There is a large range of prices Seattle home owners demand for their services. Some amenities seem to have a large impact on prices despite being quite cheap. These amenities are a prudent investment. There exists a significant seasonal influence on prices. Special events like trade shows drive prices upwards for a short amount of time. Most offerings are located near the city center, with a drop of prices and the number of offerings farther away.

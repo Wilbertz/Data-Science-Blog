@@ -15,8 +15,14 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVR
 import seaborn as sns
 
+from mpl_toolkits.basemap import Basemap
+
 
 def prepare_listings():
+    """
+    Cleanup of Airbnb data.
+    :return: None
+    """
     df= pd.read_csv("data/listings.csv")
 
     df.drop(
@@ -139,53 +145,50 @@ def train_and_predict(learner, sample_size, X_train, y_train, X_test, y_test):
     print("Test score:%.4f" % learner.score(X_test, y_test))
     return results
 
+
+def plot():
+    """
+    This methods reads in neighbourhood data from
+    the file data/neighbourhood.csv and create a file seattle_prices.png, that
+    contains a Geoplot of Seattle Airbnb prices.
+    :return: None
+    """
+    df = pd.read_csv("data/neighbourhood.csv", sep=";")
+    fig, ax = plt.subplots(figsize=(20, 20))
+    m = Basemap(projection='lcc', resolution='h', lat_0=47.63, lon_0=-122.3, width=2E4, height=3E4)
+
+    m.drawcoastlines()
+    m.drawrivers()
+    m.drawstates()
+
+    lon = df['longitude'].values
+    lat = df['latitude'].values
+    price = df['price'].values
+    count = df['count'].values
+    neighbourhood = df['neighbourhood'].values
+
+    m.scatter(lon, lat, latlon=True, c=price, s=count/15, cmap='Reds')
+    cbar = plt.colorbar(label='Price')
+    cbar.ax.set_ylabel('Price', fontsize=20)
+
+    for i, txt in enumerate(neighbourhood):
+        x, y = m(lon[i], lat[i])
+        plt.text(x, y, txt)
+
+    ax.set_xlabel('Longitude', fontsize=20)
+    ax.set_ylabel('Latitude', fontsize=20)
+    plt.title('Seattle Airbnb Prices', fontsize=40)
+
+    ax.xaxis.label.set_size(20)
+    ax.yaxis.label.set_size(20)
+
+    for a in [100, 1000, 5000]:
+        plt.scatter([], [], c='red', alpha=0.5, s=a/15, label=str(a))
+    plt.scatter([], [], c='red', alpha=0.5, s=0, label='Bookings')
+    plt.legend(scatterpoints=1, frameon=False, labelspacing=1, loc='lower right')
+
+    plt.savefig('seattle_prices.png')
+
+
 if __name__ == "__main__":
-    df_result, df_amenities = prepare_listings()
-    print(df_result.head())
-    df_result.to_csv('x.csv', encoding='utf-8', index=False, sep=";")
-    Y = df_result['price']
-    x = df_result.drop('price', axis=1)
-    #x = df_amenities
-
-    X_train, X_test, y_train, y_test = train_test_split(x, Y, test_size=0.2, random_state=42)
-
-    imputer = Imputer(strategy='median')
-    X_train_imp = imputer.fit_transform(X_train)
-    X_test_imp = imputer.transform(X_test)
-
-    scaler = StandardScaler()
-    X_train_scale = scaler.fit_transform(X_train_imp)
-
-    # transform test data
-    X_test_scale = scaler.transform(X_test_imp)
-
-    linear_regression = LinearRegression()
-    decision_tree = DecisionTreeRegressor(
-        max_depth=5,
-        min_samples_leaf=10,
-        min_samples_split=10,
-        max_leaf_nodes=8,
-        random_state=42)
-    logistic_regression = LogisticRegression(random_state=0, solver='lbfgs')
-    svr_lin = SVR(kernel='linear', C=100, gamma='auto')
-
-    samples_100 = len(y_train)
-    samples_10 = int(0.1 * len(y_train))
-    samples_1 = int(0.01 * len(y_train))
-
-    for i, samples in enumerate([samples_1, samples_10, samples_100]):
-        train_and_predict(linear_regression, samples, X_train_scale, y_train, X_test_scale, y_test)
-
-    for i, samples in enumerate([samples_1, samples_10, samples_100]):
-        train_and_predict(decision_tree, samples, X_train_scale, y_train, X_test_scale, y_test)
-
-    for i, samples in enumerate([samples_1, samples_10, samples_100]):
-        train_and_predict(logistic_regression, samples, X_train_scale, y_train, X_test_scale, y_test)
-
-    #for i, samples in enumerate([samples_1, samples_10, samples_100]):
-    #   train_and_predict(svr_lin, samples, X_train_scale, y_train, X_test_scale, y_test)
-
-    feature_importances = pd.DataFrame(linear_regression.coef_, index=X_train.columns,
-                                       columns=['coefficient']).sort_values('coefficient', ascending=False)
-
-    print(feature_importances.head(50))
+    plot()

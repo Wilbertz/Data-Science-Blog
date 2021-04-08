@@ -1,5 +1,6 @@
 # Understanding Seattle Airbnb Data
-The Ananconda notebook corresponding to a data science blog analyzing Airbnb data (https://medium.com/@harald.wilbertz/understanding-seattle-airbnb-home-data-9ae6fda98b19).
+The Ananconda notebook corresponding to a data science blog analyzing Airbnb data:
+ https://medium.com/@harald.wilbertz/understanding-seattle-airbnb-home-data-9ae6fda98b19
 
 ## Table of Contents
 
